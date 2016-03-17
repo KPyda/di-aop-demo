@@ -1,5 +1,6 @@
 package com.example;
 
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,20 +21,33 @@ public class AudienceAspect {
 
     @Pointcut("execution(* Performance.perform())")
     void perform(){}
+//
+//    @Before("perform()")
+//    void before() {
+//        audience.takeSeats();
+//        audience.silencePhones();
+//    }
+//
+//    @AfterReturning("perform()")
+//    void after(){
+//        audience.applause();
+//    }
+//
+//    @AfterThrowing("perform()")
+//    void buuu() {
+//        audience.buuuu();
+//    }
 
-    @Before("perform()")
-    void before() {
+    @Around("perform()")
+    public void around(ProceedingJoinPoint joinPoint) {
         audience.takeSeats();
         audience.silencePhones();
-    }
+        try {
+            joinPoint.proceed();
+            audience.applause();
+        } catch (Throwable throwable) {
+            audience.buuuu();
+        }
 
-    @AfterReturning("perform()")
-    void after(){
-        audience.applause();
-    }
-
-    @AfterThrowing("perform()")
-    void buuu() {
-        audience.buuuu();
     }
 }
