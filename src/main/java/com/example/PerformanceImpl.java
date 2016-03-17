@@ -11,5 +11,6 @@ public class PerformanceImpl implements Performance {
     @Override
     public void perform() throws Exception {
         System.out.println("Występ");
+//        throw new Exception();
     }
 }
