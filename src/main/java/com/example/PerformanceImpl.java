@@ -1,21 +1,15 @@
 package com.example;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by Jakub Pyda on 17.03.2016.
  */
+@Component
 public class PerformanceImpl implements Performance {
-
-    Audience audience;
-
-    public PerformanceImpl(Audience audience) {
-        this.audience = audience;
-    }
 
     @Override
     public void perform() {
-        audience.takeSeats();
-        audience.silencePhones();
         System.out.println("Występ");
-        audience.applause();
     }
 }
