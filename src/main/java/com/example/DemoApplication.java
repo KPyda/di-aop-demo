@@ -13,7 +13,11 @@ public class DemoApplication {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
 		Performance performanceImpl = (Performance)context.getBean("performanceImpl");
-		performanceImpl.perform();
+		try {
+			performanceImpl.perform();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
